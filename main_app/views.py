@@ -1,10 +1,6 @@
 from django.shortcuts import render
-
+from django.views.generic.edit import CreateView
 from .models import Cat
-
-# from django.http import HttpResponse
-
-#mock data for later when we hook up to DB
 
 
 # Create your views here.
@@ -21,3 +17,8 @@ def cat_index(request):
 def cat_detail(request, cat_id):
     cat = Cat.objects.get(id=cat_id)
     return render(request, 'cats/detail.html', {'cat': cat})
+
+class CatCreate(CreateView):
+    model = Cat 
+    fields = '__all__'
+    # success_url = '/cats/' (emoved because we use reverse method now)
